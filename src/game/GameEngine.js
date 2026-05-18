@@ -28,7 +28,7 @@ export class GameEngine {
         this.powerUpSound.volume = 0.7;
 
         this.explosionSound = new Audio('./explosion.ogg');
-        this.explosionSound.volume = 10;
+        this.explosionSound.volume = 1;
 
         this.bgmEnabled = true;
         this.animationFrameId = null;
@@ -657,7 +657,6 @@ class Player {
     render(ctx, images) {
         ctx.save();
         ctx.translate(this.x, this.y);
-        ctx.rotate(this.angle);
         
         if (this.hasShield) {
             ctx.beginPath();
@@ -701,7 +700,7 @@ class Monster {
         
         this.config = {
             normal: { radius: 35, speed: 2.0, color: '#ff6b6b', name: 'normal' },
-            fast: { radius: 25, speed: 4.0, color: '#feca57', name: 'fast' },
+            fast: { radius: 25, speed: 4.5, color: '#feca57', name: 'fast' },
             tank: { radius: 60, speed: 0.7, color: '#5f27cd', name: 'tank' },
             zigzag: { radius: 35, speed: 2.2, color: '#00d2d3', name: 'zigzag' },
             homing: { radius: 35, speed: 2.0, color: '#ff9ff3', name: 'homing' },
@@ -771,7 +770,7 @@ class Monster {
     
     teleport(player, canvas) {
         const angle = Math.random() * Math.PI * 2;
-        const distance = 60 + Math.random() * 80;
+        const distance = 100 + Math.random() * 150;
         const newX = player.x + Math.cos(angle) * distance;
         const newY = player.y + Math.sin(angle) * distance;
         
