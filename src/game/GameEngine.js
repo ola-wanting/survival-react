@@ -23,6 +23,13 @@ export class GameEngine {
         this.bgMusic = new Audio('./bgm.mp3');
         this.bgMusic.loop = true;
         this.bgMusic.volume = 0.4;
+
+        this.powerUpSound = new Audio('./powerUp.ogg');
+        this.powerUpSound.volume = 0.7;
+
+        this.explosionSound = new Audio('./explosion.ogg');
+        this.explosionSound.volume = 10;
+
         this.bgmEnabled = true;
         this.animationFrameId = null;
         this.timeoutIds = [];
@@ -432,24 +439,55 @@ this.monsters.forEach(monster =>
         return distance < (a.radius + b.radius) * 0.4;
     }
     
-    collectPowerUp(powerUp) {
-        powerUp.collected = true;
-        
-        switch(powerUp.type) {
-            case 'explosion':
-                this.createExplosion(this.player.x, this.player.y);
-                break;
-            case 'shield':
-                this.player.activateShield();
-                break;
-            case 'speed':
-                this.player.activateSpeed();
-                break;
-            case 'time':
-                this.slowTime();
-                break;
-        }
+   collectPowerUp(powerUp) {
+
+    powerUp.collected = true;
+
+    switch(powerUp.type) {
+
+        case 'explosion':
+
+            // EXPLOSION SOUND
+            if (this.bgmEnabled) {
+                this.explosionSound.currentTime = 0;
+                this.explosionSound.play();
+            }
+
+            this.createExplosion(this.player.x, this.player.y);
+            break;
+
+        case 'shield':
+
+            // NORMAL POWERUP SOUND
+            if (this.bgmEnabled) {
+                this.powerUpSound.currentTime = 0;
+                this.powerUpSound.play();
+            }
+
+            this.player.activateShield();
+            break;
+
+        case 'speed':
+
+            if (this.bgmEnabled) {
+                this.powerUpSound.currentTime = 0;
+                this.powerUpSound.play();
+            }
+
+            this.player.activateSpeed();
+            break;
+
+        case 'time':
+
+            if (this.bgmEnabled) {
+                this.powerUpSound.currentTime = 0;
+                this.powerUpSound.play();
+            }
+
+            this.slowTime();
+            break;
     }
+}
     
     createExplosion(x, y) {
         this.explosions.push(new Explosion(x, y));
