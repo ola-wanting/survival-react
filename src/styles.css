@@ -1,0 +1,231 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #1a1a2e;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+
+    background-image: url('./assets/homebackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#gameCanvas {
+    background: transparent;
+    display: block;
+}
+
+.ui-overlay {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    font-size: 18px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.score-display, .high-score {
+    margin-bottom: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.score-display {
+    font-size: 24px;
+    color: #4ecdc4;
+    padding: 8px 20px;
+}
+
+.game-over-screen, .start-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.85);
+    padding: 40px 60px;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    z-index: 100;
+}
+
+.game-over-screen h1, .start-screen h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #ff6b6b;
+}
+
+.start-screen h1 {
+    color: #4ecdc4;
+}
+
+.game-over-screen p, .start-screen p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.start-screen .controls {
+    font-size: 14px;
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 15px 40px;
+    font-size: 20px;
+    background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(78, 205, 196, 0.5);
+}
+
+.joystick-container {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    width: 120px;
+    height: 120px;
+    display: none;
+    z-index: 50;
+}
+
+.joystick-base {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.joystick-handle {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: background 0.2s;
+}
+
+.joystick-handle:active {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.power-up-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}
+
+.power-up-item {
+    display: inline-block;
+    padding: 5px 15px;
+    margin-left: 10px;
+    border-radius: 20px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.power-up-shield {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.power-up-speed {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.power-up-time {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.power-up-img {
+    display: inline-block;
+    height: 40px;
+    width: auto;
+    margin-left: 10px;
+    animation: pulse 1s infinite;
+}
+
+@media (max-width: 768px) {
+    .joystick-container {
+        display: block;
+    }
+    
+    .ui-overlay {
+        font-size: 14px;
+        top: 5px;
+        left: 5px;
+    }
+    
+    .game-over-screen, .start-screen {
+        padding: 20px 25px;
+        width: 90%;
+        max-width: 320px;
+    }
+    
+    .game-over-screen h1, .start-screen h1 {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+    
+    .game-over-screen p, .start-screen p {
+        font-size: 16px;
+        margin-bottom: 12px;
+        line-height: 1.5;
+    }
+    
+    .start-screen .controls {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+    
+    button {
+        padding: 12px 30px;
+        font-size: 16px;
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    .score-display, .high-score {
+        padding: 4px 10px;
+        font-size: 14px;
+    }
+    
+    .score-display {
+        font-size: 20px;
+    }
+}
