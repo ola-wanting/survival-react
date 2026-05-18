@@ -20,9 +20,10 @@ export class GameEngine {
         this.onScreenChange = onScreenChange;
         this.onPowerUpsChange = onPowerUpsChange;
         this.images = images;
-        this.bgMusic = new Audio('src/assets/bgm.mp3');
+        this.bgMusic = new Audio('./bgm.mp3');
         this.bgMusic.loop = true;
         this.bgMusic.volume = 0.4;
+        this.bgmEnabled = true;
         this.animationFrameId = null;
         this.timeoutIds = [];
         this.boundResize = () => this.setCanvasSize();
@@ -147,12 +148,24 @@ export class GameEngine {
         this.onFinalScoreChange(Math.floor(this.time));
         this.onScreenChange('game-over');
     }
+
+    toggleBgm() {
+    this.bgmEnabled = !this.bgmEnabled;
+
+    if (this.bgmEnabled) {
+        this.bgMusic.play();
+    } else {
+        this.bgMusic.pause();
+    }
+
+    return this.bgmEnabled;
+}
     
     startGame() {
         this.hideScreens();
         this.gameRunning = true;
         this.bgMusic.currentTime = 0;
-        this.bgMusic.play();
+        if (this.bgmEnabled) { this.bgMusic.play();}
         this.timeStopped = false;
         this.time = 0;
         this.monsters = [];
